@@ -19,123 +19,117 @@
             --madhubani-text: #212121;
         }
 
-        body, html {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body, html {
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: var(--madhubani-bg);
-            /* Textured background pattern */
+            /* Subtle handmade paper texture */
             background-image: 
                 linear-gradient(rgba(252, 244, 223, 0.9), rgba(252, 244, 223, 0.9)),
-                url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3%3Cpath d="M10 20 L20 10 L30 20 L20 30 Z" fill="%23D32F2F" fill-opacity="0.1"/%3%3Cpath d="M40 50 L50 40 L60 50 L50 60 Z" fill="%23388E3C" fill-opacity="0.1"/%3%3Cpath d="M70 80 L80 70 L90 80 L80 90 Z" fill="%231976D2" fill-opacity="0.1"/%3%3C/svg%3E');
+                url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3%3Cpath d="M10 20 L20 10 L30 20 L20 30 Z" fill="%23D32F2F" fill-opacity="0.05"/%3%3C/svg%3E');
             font-family: 'Varela Round', sans-serif;
             overflow: hidden;
+            padding: 15px; /* Ensures it doesn't touch screen edges on mobile */
         }
 
         #root {
-            z-index: 1;
+            width: 100%;
+            max-width: 500px;
         }
 
         .clock-container {
-            border: 20px solid var(--madhubani-border);
+            position: relative;
+            background-color: var(--madhubani-bg);
+            /* Scaling Border: Thicker on Desktop, thinner on Mobile */
+            border: clamp(8px, 3vw, 18px) solid var(--madhubani-border);
             border-image: repeating-linear-gradient(
                 -45deg,
                 var(--madhubani-red),
-                var(--madhubani-red) 10px,
+                var(--madhubani-red) 5px,
+                var(--madhubani-green) 5px,
                 var(--madhubani-green) 10px,
-                var(--madhubani-green) 20px,
-                var(--madhubani-blue) 20px,
-                var(--madhubani-blue) 30px
+                var(--madhubani-blue) 10px,
+                var(--madhubani-blue) 15px
             ) 20;
-            border-radius: 5px; /* Slight corner radius still */
-            padding: 3rem 5rem;
+            
+            padding: clamp(1.2rem, 5vw, 3rem);
             text-align: center;
-            background-color: var(--madhubani-bg);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
         }
 
-        /* Decorative patterns around the time */
-        .clock-container::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 1px solid var(--madhubani-text);
-            pointer-events: none;
-        }
-        
-        /* Stylized Header/Title */
         .header-title {
             font-family: 'Uncial Antiqua', serif;
-            font-size: 2.5rem;
+            font-size: clamp(1.1rem, 5vw, 2rem);
             color: var(--madhubani-text);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 0.8rem;
             border-bottom: 2px solid var(--madhubani-text);
-            padding-bottom: 0.5rem;
             display: inline-block;
+            padding-bottom: 5px;
+            letter-spacing: 1px;
         }
 
-        .decorative-symbol {
-            font-size: 2rem;
-            margin: 0 10px;
-            display: inline-block;
+        .decor-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(5px, 2vw, 15px);
+            margin: 10px 0;
+            line-height: 1;
         }
 
-        .symbol-red { color: var(--madhubani-red); }
-        .symbol-green { color: var(--madhubani-green); }
-        .symbol-blue { color: var(--madhubani-blue); }
+        .peacock-feather {
+            font-size: clamp(1.5rem, 8vw, 3rem);
+        }
+
+        .symbol {
+            font-size: clamp(0.8rem, 4vw, 1.2rem);
+            opacity: 0.8;
+        }
 
         .time-display {
-            font-family: 'Uncial Antiqua', serif; /* Hand-drawn feel */
-            font-size: 6rem;
+            font-family: 'Uncial Antiqua', serif;
+            /* Fluid Typography: min 2.8rem, max 6rem */
+            font-size: clamp(2.8rem, 14vw, 6rem);
             font-weight: 700;
             color: var(--madhubani-text);
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
             letter-spacing: -2px;
-            margin: 0;
-            text-shadow: 2px 2px 0 var(--madhubani-bg), -2px -2px 0 var(--madhubani-bg), 2px -2px 0 var(--madhubani-bg), -2px 2px 0 var(--madhubani-bg);
-            position: relative;
-        }
-
-        .date-display {
-            font-size: 1.2rem;
-            color: var(--madhubani-text);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-top: 10px;
-            font-family: 'Varela Round', sans-serif;
         }
 
         .seconds {
-            font-size: 2.5rem;
-            opacity: 0.8;
-            margin-left: 10px;
-            position: relative;
-            top: -0.5rem; /* Slightly adjust alignment */
+            font-size: 0.4em;
+            opacity: 0.6;
+            margin-left: 8px;
+            font-weight: 400;
         }
 
-        /* Peacock Feather Motifs */
-        .peacock-feather {
-            font-size: 4rem;
-            display: inline-block;
-            margin: -20px 20px -20px 20px;
+        .date-display {
+            font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+            color: var(--madhubani-text);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 5px;
         }
 
-        @media (max-width: 600px) {
-            .time-display { font-size: 3.5rem; }
-            .clock-container { padding: 2rem; border-width: 10px; border-image-width: 10; }
-            .seconds { font-size: 1.5rem; }
-            .peacock-feather { font-size: 2rem; margin: -10px 10px -10px 10px; }
-            .header-title { font-size: 1.5rem; }
+        /* Subtle Inner Border decoration */
+        .clock-container::after {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid rgba(0,0,0,0.1);
+            pointer-events: none;
         }
     </style>
 </head>
@@ -153,41 +147,29 @@
                 return () => clearInterval(timer);
             }, []);
 
-            const formatTime = (date) => {
-                const hours = date.getHours().toString().padStart(2, '0');
-                const minutes = date.getMinutes().toString().padStart(2, '0');
-                const seconds = date.getSeconds().toString().padStart(2, '0');
-                return { hours, minutes, seconds };
-            };
+            const hours = time.getHours().toString().padStart(2, '0');
+            const minutes = time.getMinutes().toString().padStart(2, '0');
+            const seconds = time.getSeconds().toString().padStart(2, '0');
 
-            const formatDate = (date) => {
-                const options = { weekday: 'long', month: 'long', day: 'numeric' };
-                return date.toLocaleDateString(undefined, options);
-            };
+            const dateStr = time.toLocaleDateString('en-IN', { 
+                weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+            });
 
-            const { hours, minutes, seconds } = formatTime(time);
-
-            // Simple Unicode or character symbols for decoration
-            const decorativeSymbols = [
-                <span className="decorative-symbol symbol-red">★</span>,
-                <span className="decorative-symbol symbol-green">◆</span>,
-                <span className="decorative-symbol symbol-blue">✺</span>,
-            ];
+            const MadhubaniDecor = () => (
+                <div className="decor-row">
+                    <span className="symbol" style={{color: 'var(--madhubani-red)'}}>✸</span>
+                    <span className="symbol" style={{color: 'var(--madhubani-green)'}}>◆</span>
+                    <span className="peacock-feather">🪶</span>
+                    <span className="symbol" style={{color: 'var(--madhubani-blue)'}}>◆</span>
+                    <span className="symbol" style={{color: 'var(--madhubani-red)'}}>✸</span>
+                </div>
+            );
 
             return (
                 <div className="clock-container">
+                    <h1 className="header-title">Yogi's Madhubani Clock</h1>
                     
-                    <div className="header-title">Yogi's Madhubani Clock</div>
-
-                    <div className="top-decor">
-                        {decorativeSymbols[0]}
-                        {decorativeSymbols[1]}
-                        {decorativeSymbols[2]}
-                        <span className="peacock-feather">🪶</span>
-                        {decorativeSymbols[2]}
-                        {decorativeSymbols[1]}
-                        {decorativeSymbols[0]}
-                    </div>
+                    <MadhubaniDecor />
                     
                     <div className="time-display">
                         {hours}:{minutes}
@@ -195,18 +177,10 @@
                     </div>
 
                     <div className="date-display">
-                        {formatDate(time)}
+                        {dateStr}
                     </div>
 
-                    <div className="bottom-decor">
-                        {decorativeSymbols[0]}
-                        {decorativeSymbols[1]}
-                        {decorativeSymbols[2]}
-                         <span className="peacock-feather">🪶</span>
-                        {decorativeSymbols[2]}
-                        {decorativeSymbols[1]}
-                        {decorativeSymbols[0]}
-                    </div>
+                    <MadhubaniDecor />
                 </div>
             );
         }
