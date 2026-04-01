@@ -12,130 +12,112 @@
     <style>
         :root {
             --madhubani-bg: #FCF4DF;
-            --madhubani-border: #8B0000;
             --madhubani-red: #D32F2F;
             --madhubani-green: #388E3C;
             --madhubani-blue: #1976D2;
             --madhubani-text: #212121;
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
             width: 100%;
-            height: 100%;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: var(--madhubani-bg);
-            /* Textured background pattern */
-            background-image: 
-                linear-gradient(rgba(252, 244, 223, 0.9), rgba(252, 244, 223, 0.9)),
-                url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3%3Cpath d="M10 20 L20 10 L30 20 L20 30 Z" fill="%23D32F2F" fill-opacity="0.1"/%3%3Cpath d="M40 50 L50 40 L60 50 L50 60 Z" fill="%23388E3C" fill-opacity="0.1"/%3%3Cpath d="M70 80 L80 70 L90 80 L80 90 Z" fill="%231976D2" fill-opacity="0.1"/%3%3C/svg%3E');
+            background-image: radial-gradient(circle at center, rgba(255,255,255,0.5) 0%, transparent 100%);
             font-family: 'Varela Round', sans-serif;
             overflow: hidden;
         }
 
-        #root {
-            z-index: 1;
-        }
-
         .clock-container {
-            border: 20px solid var(--madhubani-border);
-            border-image: repeating-linear-gradient(
-                -45deg,
-                var(--madhubani-red),
-                var(--madhubani-red) 10px,
-                var(--madhubani-green) 10px,
-                var(--madhubani-green) 20px,
-                var(--madhubani-blue) 20px,
-                var(--madhubani-blue) 30px
-            ) 20;
-            border-radius: 5px; /* Slight corner radius still */
-            padding: 3rem 5rem;
             text-align: center;
-            background-color: var(--madhubani-bg);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
             position: relative;
         }
 
-        /* Decorative patterns around the time */
-        .clock-container::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 1px solid var(--madhubani-text);
-            pointer-events: none;
-        }
-        
-        /* Stylized Header/Title */
         .header-title {
             font-family: 'Uncial Antiqua', serif;
-            font-size: 2.5rem;
+            font-size: clamp(1.2rem, 5vw, 2.2rem);
             color: var(--madhubani-text);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
+            margin-bottom: 0.5rem;
             letter-spacing: 2px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            border-bottom: 2px solid var(--madhubani-text);
-            padding-bottom: 0.5rem;
-            display: inline-block;
+            opacity: 0.9;
         }
 
-        .decorative-symbol {
-            font-size: 2rem;
-            margin: 0 10px;
-            display: inline-block;
+        .decor-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
         }
 
-        .symbol-red { color: var(--madhubani-red); }
-        .symbol-green { color: var(--madhubani-green); }
-        .symbol-blue { color: var(--madhubani-blue); }
+        .peacock-feather {
+            font-size: clamp(2rem, 10vw, 3.5rem);
+            animation: swing 3s ease-in-out infinite;
+            display: inline-block;
+            transform-origin: bottom center;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
 
         .time-display {
-            font-family: 'Uncial Antiqua', serif; /* Hand-drawn feel */
-            font-size: 6rem;
+            font-family: 'Uncial Antiqua', serif;
+            font-size: clamp(3.5rem, 20vw, 8rem);
             font-weight: 700;
             color: var(--madhubani-text);
-            letter-spacing: -2px;
-            margin: 0;
-            text-shadow: 2px 2px 0 var(--madhubani-bg), -2px -2px 0 var(--madhubani-bg), 2px -2px 0 var(--madhubani-bg), -2px 2px 0 var(--madhubani-bg);
-            position: relative;
-        }
-
-        .date-display {
-            font-size: 1.2rem;
-            color: var(--madhubani-text);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-top: 10px;
-            font-family: 'Varela Round', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            line-height: 1;
         }
 
         .seconds {
-            font-size: 2.5rem;
+            font-size: 0.35em;
+            color: var(--madhubani-red);
+            margin-left: 15px;
             opacity: 0.8;
-            margin-left: 10px;
-            position: relative;
-            top: -0.5rem; /* Slightly adjust alignment */
         }
 
-        /* Peacock Feather Motifs */
-        .peacock-feather {
-            font-size: 4rem;
-            display: inline-block;
-            margin: -20px 20px -20px 20px;
+        .date-display {
+            font-size: clamp(0.9rem, 4vw, 1.2rem);
+            color: var(--madhubani-text);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-top: 15px;
+            font-weight: bold;
         }
 
-        @media (max-width: 600px) {
-            .time-display { font-size: 3.5rem; }
-            .clock-container { padding: 2rem; border-width: 10px; border-image-width: 10; }
-            .seconds { font-size: 1.5rem; }
-            .peacock-feather { font-size: 2rem; margin: -10px 10px -10px 10px; }
-            .header-title { font-size: 1.5rem; }
+        .btn-container {
+            margin-top: 40px;
+        }
+
+        .audio-toggle {
+            padding: 10px 25px;
+            border: 2px solid var(--madhubani-text);
+            background: transparent;
+            cursor: pointer;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        .audio-toggle:hover {
+            background: var(--madhubani-text);
+            color: white;
+        }
+
+        .audio-toggle.active {
+            border-color: var(--madhubani-green);
+            color: var(--madhubani-green);
         }
     </style>
 </head>
@@ -143,50 +125,68 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
         function App() {
             const [time, setTime] = useState(new Date());
+            const [isMuted, setIsMuted] = useState(true);
+            const audioCtx = useRef(null);
+
+            // Realistic Mechanical Tick using White Noise
+            const playMechanicalTick = () => {
+                if (isMuted) return;
+                
+                if (!audioCtx.current) {
+                    audioCtx.current = new (window.AudioContext || window.webkitAudioContext)();
+                }
+
+                const context = audioCtx.current;
+                const bufferSize = context.sampleRate * 0.02; // very short burst
+                const buffer = context.createBuffer(1, bufferSize, context.sampleRate);
+                const data = buffer.getChannelData(0);
+
+                // Create white noise
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
+
+                const noise = context.createBufferSource();
+                noise.buffer = buffer;
+
+                const filter = context.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 1200; // Wood-like frequency
+                filter.Q.value = 1;
+
+                const gain = context.createGain();
+                gain.gain.setValueAtTime(0.1, context.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.015);
+
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(context.destination);
+
+                noise.start();
+            };
 
             useEffect(() => {
-                const timer = setInterval(() => setTime(new Date()), 1000);
+                const timer = setInterval(() => {
+                    setTime(new Date());
+                    playMechanicalTick();
+                }, 1000);
                 return () => clearInterval(timer);
-            }, []);
+            }, [isMuted]);
 
-            const formatTime = (date) => {
-                const hours = date.getHours().toString().padStart(2, '0');
-                const minutes = date.getMinutes().toString().padStart(2, '0');
-                const seconds = date.getSeconds().toString().padStart(2, '0');
-                return { hours, minutes, seconds };
-            };
-
-            const formatDate = (date) => {
-                const options = { weekday: 'long', month: 'long', day: 'numeric' };
-                return date.toLocaleDateString(undefined, options);
-            };
-
-            const { hours, minutes, seconds } = formatTime(time);
-
-            // Simple Unicode or character symbols for decoration
-            const decorativeSymbols = [
-                <span className="decorative-symbol symbol-red">★</span>,
-                <span className="decorative-symbol symbol-green">◆</span>,
-                <span className="decorative-symbol symbol-blue">✺</span>,
-            ];
+            const hours = time.getHours().toString().padStart(2, '0');
+            const minutes = time.getMinutes().toString().padStart(2, '0');
+            const seconds = time.getSeconds().toString().padStart(2, '0');
 
             return (
                 <div className="clock-container">
+                    <h1 className="header-title">YOGI'S CHRONICLE</h1>
                     
-                    <div className="header-title">Yogi's Madhubani Clock</div>
-
-                    <div className="top-decor">
-                        {decorativeSymbols[0]}
-                        {decorativeSymbols[1]}
-                        {decorativeSymbols[2]}
+                    <div className="decor-row">
                         <span className="peacock-feather">🪶</span>
-                        {decorativeSymbols[2]}
-                        {decorativeSymbols[1]}
-                        {decorativeSymbols[0]}
                     </div>
                     
                     <div className="time-display">
@@ -195,17 +195,19 @@
                     </div>
 
                     <div className="date-display">
-                        {formatDate(time)}
+                        {time.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'short' })}
                     </div>
 
-                    <div className="bottom-decor">
-                        {decorativeSymbols[0]}
-                        {decorativeSymbols[1]}
-                        {decorativeSymbols[2]}
-                         <span className="peacock-feather">🪶</span>
-                        {decorativeSymbols[2]}
-                        {decorativeSymbols[1]}
-                        {decorativeSymbols[0]}
+                    <div className="btn-container">
+                        <button 
+                            className={`audio-toggle ${!isMuted ? 'active' : ''}`}
+                            onClick={() => {
+                                if (audioCtx.current?.state === 'suspended') audioCtx.current.resume();
+                                setIsMuted(!isMuted);
+                            }}
+                        >
+                            {isMuted ? "🔈 ENABLE TICK-TOCK" : "🔊 SOUND ON"}
+                        </button>
                     </div>
                 </div>
             );
